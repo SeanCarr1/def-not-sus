@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #ffe4e1;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        h1 {
+            color: #d7263d;
+            margin-bottom: 40px;
+        }
+        .button-group {
+            display: flex;
+            gap: 20px;
+        }
+        .valentine-btn {
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .yes-btn {
+            background: #ffb6b9;
+            color: #fff;
+        }
+        .no-btn {
+            background: #d7263d;
+            color: #fff;
+        }
+        #gif-container {
+            margin-top: 40px;
+            display: none;
+        }
+        #gif-container img {
+            max-width: 300px;
+            border-radius: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Will you be my Valentine?</h1>
+    <div class="button-group">
+        <button class="valentine-btn yes-btn" id="yesBtn">Yes</button>
+        <button class="valentine-btn no-btn" id="noBtn">No</button>
+    </div>
+    <div id="gif-container">
+    </div>
+    <audio id="bgMusic" src="uhaw.mp3" loop autoplay></audio>
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const gifContainer = document.getElementById('gif-container');
+        const bgMusic = document.getElementById('bgMusic');
+
+        // Ensure music plays on user interaction (autoplay restrictions)
+        document.body.addEventListener('click', () => {
+            bgMusic.play();
+        }, { once: true });
+
+        let yesBtnSize = 1.5; // rem
+        let yesBtnPadding = 20; // px vertical
+        let yesBtnPaddingH = 40; // px horizontal
+        noBtn.addEventListener('click', () => {
+            yesBtnSize += 0.3;
+            yesBtnPadding += 5;
+            yesBtnPaddingH += 10;
+            yesBtn.style.fontSize = yesBtnSize + 'rem';
+            yesBtn.style.padding = yesBtnPadding + 'px ' + yesBtnPaddingH + 'px';
+        });
+
+        yesBtn.addEventListener('click', () => {
+            gifContainer.style.display = 'block';
+            gifContainer.innerHTML = `
+                <div class="tenor-gif-embed" data-postid="12992812348148825957" data-share-method="host" data-aspect-ratio="1" data-width="100%">
+                    <a href="https://tenor.com/view/bubu-dudu-valentine-valentine%27s-day-gif-12992812348148825957">Bubu Dudu Valentine Valentine's Day Sticker</a>from <a href="https://tenor.com/search/bubu+dudu+valentine-stickers">Bubu Dudu Valentine Stickers</a>
+                </div>
+            `;
+            // Dynamically add Tenor embed script
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.async = true;
+            script.src = 'https://tenor.com/embed.js';
+            gifContainer.appendChild(script);
+        });
+    </script>
+</body>
+</html>
